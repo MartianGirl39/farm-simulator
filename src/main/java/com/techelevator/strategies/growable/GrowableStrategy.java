@@ -1,4 +1,4 @@
-package com.techelevator.crops.strategies;
+package com.techelevator.strategies.growable;
 
 import com.techelevator.crops.Crop;
 

@@ -1,5 +1,5 @@
 package com.techelevator.farm;
 
-public class Ranch {
+public class Farm {
 
 }

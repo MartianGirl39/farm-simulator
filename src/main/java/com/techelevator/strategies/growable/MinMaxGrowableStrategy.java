@@ -1,4 +1,4 @@
-package com.techelevator.crops.strategies;
+package com.techelevator.strategies.growable;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -31,7 +31,7 @@ public class MinMaxGrowableStrategy extends GrowableStrategy {
         this.lastUpdate = LocalDate.now();
     }
 
-    private void checkForRestart(){
+    protected void checkForRestart(){
         if(lastUpdate.getDayOfYear() != LocalDate.now().getDayOfYear()){
             this.hoursOfSunlightToday = 0;
         }
@@ -43,7 +43,7 @@ public class MinMaxGrowableStrategy extends GrowableStrategy {
         lastUpdate = LocalDate.now();
     }
 
-    private State checkForState(int check){
+    public State checkForState(int check){
         if(super.getState() != State.DEAD){
             switch (check) {
                 case 0:
