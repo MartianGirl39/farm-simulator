@@ -1,15 +1,15 @@
 package com.techelevator.crops;
 
-import com.techelevator.strategies.growable.GrowableStrategy;
+import com.techelevator.strategies.nurturable.NuturableStrategy;
 import com.techelevator.strategies.harvestable.HarvestableStrategy;
 import com.techelevator.products.Product;
 
-public class Crop {
+public abstract class Crop {
     private final String name;    //  every crop has a name, right
-    private final GrowableStrategy growth;
+    private final NuturableStrategy growth;
     private final HarvestableStrategy harvest;
 
-        protected Crop(String name, GrowableStrategy growth, HarvestableStrategy harvest){
+        protected Crop(String name, NuturableStrategy growth, HarvestableStrategy harvest){
             this.name = name;
             this.growth = growth;
             this.harvest = harvest;
@@ -28,7 +28,7 @@ public class Crop {
     }
 
     public String getGrowthRequirements() {
-            return this.growth.getGrowthRequirements();
+            return this.growth.getHealthRequirements();
     }
 
     public String getHarvestRequirements() {
@@ -40,11 +40,11 @@ public class Crop {
     }
 
     public String water(int inchesOfWater){
-            return growth.water(inchesOfWater).toString();
+            return growth.giveWater(inchesOfWater).toString();
     }
 
     public String accountForSunlight(int hoursOfSunlight){
-            return growth.accountForSunlight(hoursOfSunlight).toString();
+            return growth.feed(hoursOfSunlight).toString();
     }
 
     public Product[] harvest() {

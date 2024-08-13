@@ -1,7 +1,9 @@
 package com.techelevator.strategies.harvestable;
 
-import com.techelevator.strategies.growable.GrowableStrategy;
+import com.techelevator.strategies.nurturable.NuturableStrategy;
 import com.techelevator.products.Product;
+
+import java.time.Month;
 
 public abstract class HarvestableStrategy {
 
@@ -15,7 +17,9 @@ public abstract class HarvestableStrategy {
         this.harvested = 0;
     }
 
-    public abstract Product[] harvest(GrowableStrategy.State state);
+    public abstract Product[] harvest(NuturableStrategy.State state);
+
+    public abstract Product[] harvest(NuturableStrategy.State state, Month month);
 
     public int getYield() {
         return yield;

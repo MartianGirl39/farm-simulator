@@ -8,8 +8,8 @@ import com.techelevator.strategies.harvestable.IntervalHarvesStrategy;
 import com.techelevator.strategies.nurturable.NuturableStrategy;
 import com.techelevator.strategies.sellable.SellableStrategy;
 
-public class Chicken extends ProducerAnimal {
-    public Chicken(String species, String name, NuturableStrategy growth, HarvestableStrategy harvest, SellableStrategy sell) {
+public class Sheep extends ProducerAnimal {
+    public Sheep(String species, String name, NuturableStrategy growth, HarvestableStrategy harvest, SellableStrategy sell) {
         super(species, name, growth, harvest, sell);
     }
 }

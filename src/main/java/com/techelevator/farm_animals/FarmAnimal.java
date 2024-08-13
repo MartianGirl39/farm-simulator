@@ -1,22 +1,21 @@
 package com.techelevator.farm_animals;
 
-import com.techelevator.farm.Farm;
 import com.techelevator.products.Product;
-import com.techelevator.strategies.growable.GrowableStrategy;
-import com.techelevator.strategies.growable.MinMaxGrowableStrategy;
+import com.techelevator.strategies.nurturable.NuturableStrategy;
 import com.techelevator.strategies.harvestable.HarvestableStrategy;
+import com.techelevator.strategies.sellable.SellableStrategy;
 
-public class FarmAnimal {
+public abstract class FarmAnimal {
     private final String species;
     private final String name;
-    private final GrowableStrategy growth;
-    private final HarvestableStrategy harvest;
+    private final NuturableStrategy growth;
+    final SellableStrategy sell;
 
-    protected FarmAnimal(String species, String name, GrowableStrategy growth, HarvestableStrategy harvest){
+    protected FarmAnimal(String species, String name, NuturableStrategy growth, SellableStrategy sell) {
         this.species = species;
         this.name = name;
         this.growth = growth;
-        this.harvest = harvest;
+        this.sell = sell;
     }
 
     public String getName() {
@@ -28,20 +27,24 @@ public class FarmAnimal {
     }
 
     public String feed(int food){
-        this.growth.water(food);
+        this.growth.feed(food);
         return this.growth.getState().toString() == "Withered" ? "Sickly" : this.growth.getState().toString();
     }
 
-    public String getHealth(){
-        return this.growth.getState().toString() == "Withered" ? "Sickly" : this.growth.getState().toString();
+    public NuturableStrategy.State getHealth(){
+        return this.growth.getState();
     }
 
     public String accountForWaterGiven(int waterGivenToday){
-        this.growth.accountForSunlight(waterGivenToday);
+        this.growth.giveWater(waterGivenToday);
         return this.growth.getState().toString() == "Withered" ? "Sickly" : this.growth.getState().toString();
     }
 
-    public Product[] harvestProduct(){
-        return this.harvest.harvest(growth.getState());
+    public double sell(){
+        return sell.sell(this.getHealth());
+    }
+
+    public double getSellPrice(){
+        return sell.getOffer();
     }
 }

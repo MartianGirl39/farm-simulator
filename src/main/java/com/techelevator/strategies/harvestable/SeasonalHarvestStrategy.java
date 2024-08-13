@@ -1,24 +1,24 @@
 package com.techelevator.strategies.harvestable;
 
-import com.techelevator.strategies.growable.GrowableStrategy;
+import com.techelevator.strategies.nurturable.NuturableStrategy;
 import com.techelevator.products.Product;
 
 import java.time.LocalDate;
 import java.time.Month;
 
-public class SeasonalHarvestableStrategy extends HarvestableStrategy {
+public class SeasonalHarvestStrategy extends HarvestableStrategy {
     private Month seasonStart, seasonEnd;
     private Month lastHarvest;
 
-    public SeasonalHarvestableStrategy(int yield, Product product, Month seasonStart, Month seasonEnd) {
+    public SeasonalHarvestStrategy(int yield, Product product, Month seasonStart, Month seasonEnd) {
         super(yield, product);
         this.seasonStart = seasonStart;
         this.seasonEnd = seasonEnd;
     }
 
     @Override
-    public Product[] harvest(GrowableStrategy.State state) {
-        if(!this.getIsInSeason(LocalDate.now().getMonth()) || state == GrowableStrategy.State.DEAD){
+    public Product[] harvest(NuturableStrategy.State state) {
+        if(!this.getIsInSeason(LocalDate.now().getMonth()) || state == NuturableStrategy.State.DEAD){
             return null;
         }
         return super.getProducts();
@@ -29,8 +29,8 @@ public class SeasonalHarvestableStrategy extends HarvestableStrategy {
         return String.format("Plant must be harvest in season\nStart of season: %s\nEnd of season: %s", this.seasonStart, this.seasonEnd);
     }
 
-    public Product[] harvest(GrowableStrategy.State state, Month month) {
-        if(!this.getIsInSeason(month) || state == GrowableStrategy.State.DEAD){
+    public Product[] harvest(NuturableStrategy.State state, Month month) {
+        if(!this.getIsInSeason(month) || state == NuturableStrategy.State.DEAD){
             return null;
         }
         return super.getProducts();

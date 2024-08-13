@@ -13,6 +13,10 @@ public class Product {
         return this;
     }
 
+    public Product makeDeprecatedCopy(double toDeprecate){
+        return new Product(this.name, this.currentValue - toDeprecate);
+    }
+
     public String getName() {
         return name;
     }
@@ -20,4 +24,5 @@ public class Product {
     public double getCurrentValue() {
         return currentValue;
     }
+
 }

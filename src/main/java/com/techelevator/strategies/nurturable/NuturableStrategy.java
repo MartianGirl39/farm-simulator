@@ -1,8 +1,6 @@
-package com.techelevator.strategies.growable;
+package com.techelevator.strategies.nurturable;
 
-import com.techelevator.crops.Crop;
-
-public abstract class GrowableStrategy {
+public abstract class NuturableStrategy {
     private State state = State.HEALTHY;
 
     public static enum State {
@@ -12,13 +10,13 @@ public abstract class GrowableStrategy {
         WITHERED,
         DEAD
     }
-    public GrowableStrategy(){
+    public NuturableStrategy(){
         this.state = State.HEALTHY;
     }
-    public abstract State water(int inchesOfWater);
-    public abstract State accountForSunlight(int hoursOfSunlight);
+    public abstract State giveWater(int inchesOfWater);
+    public abstract State feed(int hoursOfSunlight);
 
-    public abstract String getGrowthRequirements();
+    public abstract String getHealthRequirements();
 
     public State getState() {
         return state;

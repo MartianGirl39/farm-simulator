@@ -1,16 +1,16 @@
 package com.techelevator.strategies.harvestable;
 
-import com.techelevator.strategies.growable.GrowableStrategy;
+import com.techelevator.strategies.nurturable.NuturableStrategy;
 import com.techelevator.products.Product;
 
 import java.time.LocalDate;
 import java.time.Month;
 
-public class MultiHarvestSeasonalHarvestableStrategy extends SeasonalHarvestableStrategy {
+public class MultiHarvestSeasonalHarvestStrategy extends SeasonalHarvestStrategy {
     int harvestsPerSeason;
     int intervalBetweenHarvest;
     LocalDate lastHarvest;
-    public MultiHarvestSeasonalHarvestableStrategy(int yield, Product product, Month seasonStart, Month seasonEnd, int harvestsPerSeason, int intervalBetweenHarvest) {
+    public MultiHarvestSeasonalHarvestStrategy(int yield, Product product, Month seasonStart, Month seasonEnd, int harvestsPerSeason, int intervalBetweenHarvest) {
         super(yield, product, seasonStart, seasonEnd);
         this.harvestsPerSeason = harvestsPerSeason;
         this.intervalBetweenHarvest = intervalBetweenHarvest;
@@ -18,8 +18,8 @@ public class MultiHarvestSeasonalHarvestableStrategy extends SeasonalHarvestable
     }
 
     @Override
-    public Product[] harvest(GrowableStrategy.State state) {
-        if(!this.getIsInSeason(LocalDate.now().getMonth()) || state == GrowableStrategy.State.DEAD){
+    public Product[] harvest(NuturableStrategy.State state) {
+        if(!this.getIsInSeason(LocalDate.now().getMonth()) || state == NuturableStrategy.State.DEAD){
             return null;
         }
         boolean greater = this.lastHarvest.getDayOfYear() < LocalDate.now().getDayOfYear();
@@ -34,8 +34,8 @@ public class MultiHarvestSeasonalHarvestableStrategy extends SeasonalHarvestable
         return null;
     }
 
-    public Product[] harvest(GrowableStrategy.State state, Month month) {
-        if(!this.getIsInSeason(LocalDate.now().getMonth()) || state == GrowableStrategy.State.DEAD){
+    public Product[] harvest(NuturableStrategy.State state, Month month) {
+        if(!this.getIsInSeason(LocalDate.now().getMonth()) || state == NuturableStrategy.State.DEAD){
             return null;
         }
         boolean greater = this.lastHarvest.getDayOfYear() < LocalDate.now().getDayOfYear();

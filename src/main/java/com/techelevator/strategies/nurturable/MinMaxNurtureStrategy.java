@@ -1,9 +1,9 @@
-package com.techelevator.strategies.growable;
+package com.techelevator.strategies.nurturable;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-public class MinMaxGrowableStrategy extends GrowableStrategy {
+public class MinMaxNurtureStrategy extends NuturableStrategy {
 
     // for updates
     private final DayOfWeek startOfWeek;
@@ -21,7 +21,7 @@ public class MinMaxGrowableStrategy extends GrowableStrategy {
     double minSunlightPerWeek;
     double maxSunlightPerWeek;
 
-    public MinMaxGrowableStrategy(int minWater, int maxWater, int minSunlight, int maxSunlight){
+    public MinMaxNurtureStrategy(int minWater, int maxWater, int minSunlight, int maxSunlight){
         super();
         this.startOfWeek = LocalDate.now().getDayOfWeek();
         this.minWaterPerWeek = maxWater;
@@ -67,7 +67,7 @@ public class MinMaxGrowableStrategy extends GrowableStrategy {
     }
 
     @Override
-    public State water(int inchesOfWater) {
+    public State giveWater(int inchesOfWater) {
         checkForRestart();
         this.inchesOfWaterThisWeek += inchesOfWater;
         this.daysWaterOverUnderMax = this.inchesOfWaterThisWeek < this.minWaterPerWeek || this.daysWaterOverUnderMax > this.maxWaterPerWeek ? this.daysWaterOverUnderMax + 1 : this.daysWaterOverUnderMax;
@@ -79,7 +79,7 @@ public class MinMaxGrowableStrategy extends GrowableStrategy {
     }
 
     @Override
-    public State accountForSunlight(int hoursOfSunlight) {
+    public State feed(int hoursOfSunlight) {
         checkForRestart();
         this.hoursOfSunlightToday += hoursOfSunlight;
         this.daysSunOverUnderMax = this.hoursOfSunlightToday < this.minSunlightPerWeek || this.hoursOfSunlightToday > this.maxWaterPerWeek ? this.daysSunOverUnderMax + 1 : this.daysSunOverUnderMax;
@@ -91,7 +91,7 @@ public class MinMaxGrowableStrategy extends GrowableStrategy {
     }
 
     @Override
-    public String getGrowthRequirements() {
+    public String getHealthRequirements() {
         return String.format("minimum water needed per week: %s\nmaximum water needed per week: %s\nminimum sun needed per day: %s\nmaximum sun needed per day: %s", this.minWaterPerWeek, this.maxWaterPerWeek, this.minSunlightPerWeek, this.maxSunlightPerWeek);
     }
 }
