@@ -4,6 +4,7 @@ import com.techelevator.strategies.nurturable.NuturableStrategy;
 import com.techelevator.products.Product;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 public class IntervalHarvesStrategy extends HarvestableStrategy {
     private LocalDate lastHarvest;
@@ -30,6 +31,11 @@ public class IntervalHarvesStrategy extends HarvestableStrategy {
             return null;
         }
         return null;
+    }
+
+    @Override
+    public Product[] harvest(NuturableStrategy.State state, Month month) {
+        return new Product[0];
     }
 
     @Override

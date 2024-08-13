@@ -3,6 +3,8 @@ package com.techelevator.strategies.harvestable;
 import com.techelevator.products.Product;
 import com.techelevator.strategies.nurturable.NuturableStrategy;
 
+import java.time.Month;
+
 public class SingleHarvestStrategy extends HarvestableStrategy {
     boolean isHarvested;
 
@@ -16,6 +18,14 @@ public class SingleHarvestStrategy extends HarvestableStrategy {
     public Product[] harvest(NuturableStrategy.State state) throws RuntimeException {
         if(isHarvested){
             throw new RuntimeException();
+        }
+        return super.getProducts();
+    }
+
+    @Override
+    public Product[] harvest(NuturableStrategy.State state, Month month) {
+        if(state == NuturableStrategy.State.DEAD || isHarvested){
+            return null;
         }
         return super.getProducts();
     }
