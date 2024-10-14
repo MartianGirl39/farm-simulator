@@ -6,11 +6,11 @@ import com.techelevator.products.Product;
 import java.time.LocalDate;
 import java.time.Month;
 
-public class IntervalHarvesStrategy extends HarvestableStrategy {
+public class IntervalHarvestStrategy extends HarvestableStrategy {
     private LocalDate lastHarvest;
     private int intervalUntilNextHarvest;
 
-    public IntervalHarvesStrategy(int yield, Product product, int intervalUntilNextHarvest) {
+    public IntervalHarvestStrategy(int yield, Product product, int intervalUntilNextHarvest) {
         super(yield, product);
         this.intervalUntilNextHarvest = intervalUntilNextHarvest;
         this.lastHarvest = LocalDate.now();

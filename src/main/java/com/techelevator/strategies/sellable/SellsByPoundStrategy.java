@@ -23,7 +23,6 @@ public class SellsByPoundStrategy extends SellableStrategy {
     @Override
     public double getOffer() {
         return super.getSellingPrice() * weight;
-
     }
 
     public void setWeight(int weight) {
